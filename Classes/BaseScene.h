@@ -35,13 +35,24 @@ public:
         cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
 #if ENABLE_LOGO
-        for (int i = 0; i < 3; ++i) {
-            cocos2d::Sprite *sprite = cocos2d::Sprite::create("xyg.png");
-            this->addChild(sprite);
-            sprite->setOpacity(0x10);
-            sprite->setRotation(-45);
-            sprite->setScale(256 / sprite->getContentSize().width);
-            sprite->setPosition(cocos2d::Vec2(origin.x + visibleSize.width * 0.5f, origin.y + visibleSize.height * 0.5f + 200.0f * (1 - i)));
+        float cellWidth = (visibleSize.width) / 4.f;
+        float cellHeight = (visibleSize.height) / 8.f;
+        float margin = 0;
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 6; j++) {
+                if (i % 2) {
+                    margin = cellWidth / 2;
+                } else {
+                    margin = 0;
+                }
+                cocos2d::Sprite *sprite = cocos2d::Sprite::create("logo.jpeg");
+                this->addChild(sprite);
+                sprite->setOpacity(0x10);
+                sprite->setRotation(-45);
+                sprite->setScale(32 / sprite->getContentSize().width);
+                sprite->setPosition(cocos2d::Vec2(origin.x + margin + cellWidth * j,
+                                         origin.y + cellHeight * i));
+            }
         }
 #endif
 
